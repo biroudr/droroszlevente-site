@@ -15,32 +15,29 @@
   <meta property="og:locale" content="hu_HU">
   <!-- Favicon placeholder -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦷</text></svg>">
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18181441339"></script>
+  <!-- Google Consent Mode v2 (must load BEFORE any tags) -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'AW-18181441339');
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'analytics_storage': 'denied',
+      'functionality_storage': 'granted',
+      'security_storage': 'granted',
+      'wait_for_update': 500
+    });
+    gtag('set', 'ads_data_redaction', true);
+    gtag('set', 'url_passthrough', true);
   </script>
-    <!-- Meta Pixel Code -->
-    <script>
-          !function(f,b,e,v,n,t,s)
-          {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-                n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-               if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-               n.queue=[];t=b.createElement(e);t.async=!0;
-               t.src=v;s=b.getElementsByTagName(e)[0];
-               s.parentNode.insertBefore(t,s)}(window, document,'script',
-                                                   'https://connect.facebook.net/en_US/fbevents.js');
-          fbq('init', '27664477053242811');
-          fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-                  src="https://www.facebook.com/tr?id=27664477053242811&ev=PageView&noscript=1"
-                  /></noscript>
-  <!-- End Meta Pixel Code -->
-    </script>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GT-NSL3QQP2');</script>
+  <!-- End Google Tag Manager -->
   <style>
     /* === RESET & BASE === */
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -299,6 +296,9 @@
   </style>
 </head>
 <body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GT-NSL3QQP2" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
 
   <!-- HEADER -->
   <header class="header">
@@ -468,6 +468,121 @@
       </div>
     </div>
   </footer>
+
+  <!-- Cookie Consent Banner -->
+  <style>
+    .cookie-consent {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999;
+      background: #0f2640; color: rgba(255,255,255,.9);
+      padding: 1rem 1.25rem; font-size: .85rem; line-height: 1.5;
+      display: none; box-shadow: 0 -2px 20px rgba(0,0,0,.15);
+    }
+    .cookie-consent.show { display: block; }
+    .cookie-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: .75rem;
+    }
+    .cookie-text { flex: 1; min-width: 280px; }
+    .cookie-text a { color: #d4b87a; text-decoration: underline; }
+    .cookie-buttons { display: flex; gap: .5rem; flex-shrink: 0; }
+    .cookie-btn {
+      border: none; cursor: pointer; padding: .5rem 1.25rem;
+      border-radius: 4px; font-size: .85rem; font-weight: 600;
+      transition: opacity .2s;
+    }
+    .cookie-btn:hover { opacity: .85; }
+    .cookie-accept { background: #b08d57; color: #fff; }
+    .cookie-reject { background: transparent; color: rgba(255,255,255,.7); border: 1px solid rgba(255,255,255,.3); }
+  </style>
+
+  <div id="cookieConsent" class="cookie-consent">
+    <div class="cookie-inner">
+      <div class="cookie-text">
+        Ez a weboldal sütiket (cookie-kat) használ a felhasználói élmény javításához, a forgalom méréséhez
+        és a hirdetések hatékonyságának növeléséhez.
+        <a href="/adatvedelem.html">Adatvédelmi nyilatkozat</a>
+      </div>
+      <div class="cookie-buttons">
+        <button class="cookie-btn cookie-reject" onclick="handleCookieConsent(false)">Elutasítom</button>
+        <button class="cookie-btn cookie-accept" onclick="handleCookieConsent(true)">Elfogadom</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cookie Consent + Conversion Tracking Script -->
+  <script>
+    // === Cookie Consent Logic ===
+    function handleCookieConsent(accepted) {
+      var el = document.getElementById('cookieConsent');
+      if (el) el.classList.remove('show');
+      localStorage.setItem('cookie_consent', accepted ? 'granted' : 'denied');
+      localStorage.setItem('cookie_consent_date', new Date().toISOString());
+      updateConsent(accepted);
+    }
+
+    function updateConsent(accepted) {
+      if (typeof gtag === 'function') {
+        if (accepted) {
+          gtag('consent', 'update', {
+            'ad_storage': 'granted',
+            'ad_user_data': 'granted',
+            'ad_personalization': 'granted',
+            'analytics_storage': 'granted'
+          });
+        } else {
+          gtag('consent', 'update', {
+            'ad_storage': 'denied',
+            'ad_user_data': 'denied',
+            'ad_personalization': 'denied',
+            'analytics_storage': 'denied'
+          });
+        }
+      }
+    }
+
+    // Check stored consent on page load
+    (function() {
+      var stored = localStorage.getItem('cookie_consent');
+      if (stored === 'granted') {
+        updateConsent(true);
+      } else if (stored === 'denied') {
+        updateConsent(false);
+      } else {
+        // No decision yet — show banner after 1 second
+        setTimeout(function() {
+          var el = document.getElementById('cookieConsent');
+          if (el) el.classList.add('show');
+        }, 1000);
+      }
+    })();
+
+    // === Conversion Tracking (dataLayer events) ===
+    document.addEventListener('click', function(e) {
+      var link = e.target.closest('a');
+      if (!link) return;
+      var href = link.getAttribute('href') || '';
+
+      // Phone click tracking
+      if (href.indexOf('tel:') === 0) {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          'event': 'phone_click',
+          'phone_number': href.replace('tel:', ''),
+          'click_location': link.textContent.trim()
+        });
+      }
+
+      // WhatsApp click tracking
+      if (href.indexOf('wa.me') !== -1) {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          'event': 'whatsapp_click',
+          'click_location': link.textContent.trim()
+        });
+      }
+    });
+  </script>
 
 </body>
 </html>
